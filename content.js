@@ -601,7 +601,7 @@
     // Update theme class in case system theme changed
     const overlay = shadowRoot.getElementById('overlay');
     overlay.classList.remove('dark', 'light');
-    overlay.classList.add(isDarkMode() ? 'dark' : 'light');
+    overlay.classList.add(getEffectiveTheme());
 
     // Fetch tabs from background script
     chrome.runtime.sendMessage({ action: 'getTabs' }, (response) => {
