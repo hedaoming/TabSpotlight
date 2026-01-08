@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tab Spotlight",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A Spotlight-like tab switcher for Chrome. Keyboard-first, instant access to your tabs.",
   "permissions": [
     "tabs",

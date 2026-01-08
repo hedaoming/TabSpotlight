@@ -82,6 +82,13 @@
         updateOverlayTheme();
       }
     });
+
+    // Auto-close overlay when tab hidden (user switches tabs)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden' && isOpen) {
+        closeOverlay();
+      }
+    });
   }
 
   function getStyles() {
