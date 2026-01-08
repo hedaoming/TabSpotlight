@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
         });
     }
+
+    // Display platform-specific shortcut
+    const isMac = navigator.userAgent.indexOf('Mac') !== -1;
+    const shortcutKey = document.getElementById('shortcut-key');
+    if (shortcutKey) {
+        shortcutKey.textContent = isMac ? 'Cmd+Shift+S' : 'Ctrl+Shift+S';
+    }
 });
 
 function setActiveTheme(theme) {
