@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
+
+    // Configure shortcut button logic
+    const configureLink = document.getElementById('configure-shortcut');
+    if (configureLink) {
+        configureLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+        });
+    }
 });
 
 function setActiveTheme(theme) {
