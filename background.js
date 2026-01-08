@@ -2,13 +2,10 @@
 
 console.log('[Tab Spotlight] Background service worker started');
 
-// Listen for keyboard shortcut command
-// Note: Toolbar click now opens popup.html for settings
-chrome.commands.onCommand.addListener((command) => {
-  console.log('[Tab Spotlight] Command received:', command);
-  if (command === 'toggle-spotlight') {
-    toggleSpotlight();
-  }
+// Listen for toolbar icon click - this triggers the spotlight
+chrome.action.onClicked.addListener((tab) => {
+  console.log('[Tab Spotlight] Action button clicked');
+  toggleSpotlight();
 });
 
 async function toggleSpotlight() {

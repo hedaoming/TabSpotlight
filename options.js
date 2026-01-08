@@ -1,4 +1,4 @@
-// Tab Spotlight - Popup Settings Script
+// Tab Spotlight - Options Page Script
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Load saved settings
@@ -29,15 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
-
-    // Configure shortcut button
-    document.getElementById('configure-shortcut').addEventListener('click', () => {
-        // Open Chrome's extension shortcuts page
-        chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
-    });
-
-    // Update shortcut display based on platform
-    updateShortcutDisplay();
 });
 
 function setActiveTheme(theme) {
@@ -52,23 +43,4 @@ function showSavedIndicator() {
     setTimeout(() => {
         indicator.classList.remove('show');
     }, 1500);
-}
-
-function updateShortcutDisplay() {
-    const display = document.getElementById('shortcut-display');
-    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-
-    if (isMac) {
-        display.innerHTML = `
-      <span class="key">⌘</span>
-      <span class="key">⇧</span>
-      <span class="key">K</span>
-    `;
-    } else {
-        display.innerHTML = `
-      <span class="key">Ctrl</span>
-      <span class="key">Shift</span>
-      <span class="key">K</span>
-    `;
-    }
 }
