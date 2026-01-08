@@ -2,11 +2,16 @@
 
 console.log('[Tab Spotlight] Background service worker started');
 
-// Listen for toolbar icon click - this triggers the spotlight
-chrome.action.onClicked.addListener((tab) => {
-  console.log('[Tab Spotlight] Action button clicked');
-  toggleSpotlight();
+// Listen for keyboard shortcut command - this triggers the spotlight search
+chrome.commands.onCommand.addListener((command) => {
+  console.log('[Tab Spotlight] Command received:', command);
+  if (command === 'toggle-spotlight') {
+    toggleSpotlight();
+  }
 });
+
+// Note: Toolbar icon click opens popup.html (settings) via default_popup in manifest
+// No action.onClicked listener needed when default_popup is set
 
 async function toggleSpotlight() {
   try {
@@ -23,7 +28,6 @@ async function toggleSpotlight() {
     if (tab.url.startsWith('chrome://') || tab.url.startsWith('edge://') ||
       tab.url.startsWith('chrome-extension://') || tab.url.startsWith('about:')) {
       console.warn('[Tab Spotlight] Cannot inject into special page:', tab.url);
-      // Could show a notification here
       return;
     }
 
@@ -73,13 +77,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       console.log('[Tab Spotlight] Returning', tabsData.length, 'tabs');
       sendResponse({ tabs: tabsData });
     });
-    return true; // Keep message channel open for async response
+    return true;
   }
 
   if (request.action === 'switchToTab') {
     const { tabId, windowId } = request;
     console.log('[Tab Spotlight] Switching to tab:', tabId, 'window:', windowId);
-    // Focus the window first, then activate the tab
     chrome.windows.update(windowId, { focused: true }, () => {
       chrome.tabs.update(tabId, { active: true });
     });
