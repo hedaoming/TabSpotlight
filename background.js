@@ -1,10 +1,10 @@
 // Tab Spotlight - Background Service Worker
 
-console.log('[Tab Spotlight] Background service worker started');
+
 
 // Listen for keyboard shortcut command - this triggers the spotlight search
 chrome.commands.onCommand.addListener((command) => {
-  console.log('[Tab Spotlight] Command received:', command);
+
   if (command === 'toggle-spotlight') {
     toggleSpotlight();
   }
@@ -22,7 +22,7 @@ async function toggleSpotlight() {
       return;
     }
 
-    console.log('[Tab Spotlight] Active tab:', tab.id, tab.url);
+
 
     // Check if we can inject into this tab (not chrome://, edge://, etc.)
     if (tab.url.startsWith('chrome://') || tab.url.startsWith('edge://') ||
@@ -34,10 +34,10 @@ async function toggleSpotlight() {
     // Try to send message first
     try {
       await chrome.tabs.sendMessage(tab.id, { action: 'toggle' });
-      console.log('[Tab Spotlight] Message sent successfully');
+
     } catch (error) {
       // Content script might not be loaded yet, inject it
-      console.log('[Tab Spotlight] Content script not ready, injecting...', error.message);
+
 
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
@@ -48,7 +48,7 @@ async function toggleSpotlight() {
       setTimeout(async () => {
         try {
           await chrome.tabs.sendMessage(tab.id, { action: 'toggle' });
-          console.log('[Tab Spotlight] Message sent after injection');
+
         } catch (e) {
           console.error('[Tab Spotlight] Failed to send message after injection:', e);
         }
@@ -61,7 +61,7 @@ async function toggleSpotlight() {
 
 // Listen for messages from content script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('[Tab Spotlight] Message received:', request.action);
+
 
   if (request.action === 'getTabs') {
     // Get all tabs from all windows
@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         favIconUrl: tab.favIconUrl || '',
         active: tab.active
       }));
-      console.log('[Tab Spotlight] Returning', tabsData.length, 'tabs');
+
       sendResponse({ tabs: tabsData });
     });
     return true;
@@ -82,7 +82,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (request.action === 'switchToTab') {
     const { tabId, windowId } = request;
-    console.log('[Tab Spotlight] Switching to tab:', tabId, 'window:', windowId);
+
     chrome.windows.update(windowId, { focused: true }, () => {
       chrome.tabs.update(tabId, { active: true });
     });
@@ -91,7 +91,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 
   if (request.action === 'closeTab') {
-    console.log('[Tab Spotlight] Closing tab:', request.tabId);
+
     chrome.tabs.remove(request.tabId, () => {
       sendResponse({ success: true });
     });

@@ -1,0 +1,7 @@
+# Exclude Mac system files
+.DS_Store
+**/.DS_Store
+
+# Exclude build artifacts
+*.zip
+TabSpotlight.zip

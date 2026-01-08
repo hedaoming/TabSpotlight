@@ -30,7 +30,7 @@
       const result = await chrome.storage.sync.get({ theme: 'auto' });
       userThemeSetting = result.theme;
     } catch (e) {
-      console.log('[Tab Spotlight] Could not load theme setting, using default');
+
       userThemeSetting = 'auto';
     }
   }
@@ -753,7 +753,7 @@
 
   // Listen for messages from background script and popup
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log('[Tab Spotlight] Content script received message:', request.action);
+
 
     if (request.action === 'toggle') {
       if (isOpen) {
@@ -779,6 +779,6 @@
   // Load theme setting on script initialization
   loadThemeSetting();
 
-  console.log('[Tab Spotlight] Content script loaded');
+
 
 })();
