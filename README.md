@@ -1,50 +1,41 @@
 # Tab Spotlight
 
-**Tab Spotlight** 是一个类似 Spotlight 的 Chrome 标签页切换工具。键盘优先，快速访问你的标签页。
+[Read in 中文](README_zh.md)
 
-## 功能特点
-- 🚀 **快速切换**：像 macOS Spotlight 一样快速查找和切换标签页。
-- ⌨️ **键盘优先**：完全无需鼠标即可操作。
-- 🔍 **智能搜索**：支持标题和 URL 搜索。
+**Tab Spotlight** is a Spotlight-like tab switcher for Chrome. Designed for keyboard-first usage to quickly access your tabs.
 
-## 快捷键
+## Features
+- 🚀 **Quick Switch**: Find and switch tabs fast, just like macOS Spotlight.
+- ⌨️ **Keyboard First**: Completely usable without a mouse.
+- 🔍 **Smart Search**: Supports searching by title and URL.
+
+## Shortcuts
 - **Mac**: `Command` + `Shift` + `S`
 - **Windows/Linux**: `Ctrl` + `Shift` + `S`
 
-## 安装说明 (开发者模式)
-1. 下载代码到本地。
-2. 打开 Chrome 浏览器，进入扩展程序管理页面：`chrome://extensions/`。
-3. 开启右上角的 **"开发者模式" (Developer mode)**。
-4. 点击 **"加载已解压的扩展程序" (Load unpacked)**。
-5. 选择本项目所在的文件夹。
+## Installation (Developer Mode)
+1. Download the code to your local machine.
+2. Open Chrome and go to the Extensions management page: `chrome://extensions/`.
+3. Enable **"Developer mode"** in the top right corner.
+4. Click **"Load unpacked"**.
+5. Select the folder containing this project.
 
-## 发布与打包
-本项目包含一个自动化打包脚本 `release.sh`，用于生成发布所需的 `.zip` 文件。
+## Release & Packaging
+This project includes an automated packaging script `release.sh` to generate the `.zip` file required for publishing.
 
-### 如何使用 release 脚本
-该脚本会自动清理旧的构建包，并将除开发文件（如 `.git`, `release.sh`, `README.md` 等）以外的内容打包成 `TabSpotlight.zip`。
+### How to use the release script
+The script automatically cleans old build packages and zips everything except development files (like `.git`, `release.sh`, `README.md`, etc.) into `TabSpotlight.zip`.
 
-#### 步骤：
-1. 打开终端 (Terminal)。
-2. 进入项目根目录：
+#### Steps:
+1. Open Terminal.
+2. Navigate to the project root directory:
    ```bash
    cd /path/to/TabSpotlight
    ```
-3. 运行打包脚本：
+3. Run the script:
    ```bash
    ./release.sh
    ```
-   *注意：如果遇到权限不足的问题，请先添加执行权限：`chmod +x release.sh`*
+   *Note: If you encounter permission issues, run `chmod +x release.sh` first.*
 
-4. 脚本执行完毕后，会在当前目录下生成 `TabSpotlight.zip` 文件，可直接用于上传至 Chrome Web Store。
-
-### 脚本说明
-`release.sh` 主要执行以下操作：
-- 删除旧的 `TabSpotlight.zip`（如果存在）。
-- 使用 `zip` 命令打包当前目录下的所有文件。
-- 自动排除以下非发布必需文件：
-  - `.git` 目录
-  - `.DS_Store` 系统文件
-  - `release.sh` 脚本本身
-  - `README.md` 文档
-
+4. After execution, `TabSpotlight.zip` will be generated in the current directory, ready for upload to the Chrome Web Store.
