@@ -2,6 +2,28 @@
 
 
 
+chrome.runtime.onInstalled.addListener(async (details) => {
+  if (details.reason !== 'install') {
+    return;
+  }
+
+  try {
+    const commands = await chrome.commands.getAll();
+    const toggleCommand = commands.find((command) => command.name === 'toggle-spotlight');
+
+    if (!toggleCommand || toggleCommand.shortcut) {
+      return;
+    }
+
+    const platformInfo = await chrome.runtime.getPlatformInfo();
+    const shortcut = platformInfo.os === 'mac' ? 'Command+Shift+S' : 'Ctrl+Shift+S';
+
+    await chrome.commands.update({ name: 'toggle-spotlight', shortcut });
+  } catch (error) {
+    console.warn('[Tab Spotlight] Unable to set default shortcut:', error);
+  }
+});
+
 // Listen for keyboard shortcut command - this triggers the spotlight search
 chrome.commands.onCommand.addListener((command) => {
 
@@ -30,6 +52,11 @@ async function toggleSpotlight() {
       console.warn('[Tab Spotlight] Cannot inject into special page:', tab.url);
       return;
     }
+
+    await chrome.windows.update(tab.windowId, { focused: true });
+    await chrome.tabs.update(tab.id, { active: true });
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     // Try to send message first
     try {
