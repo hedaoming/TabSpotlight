@@ -621,16 +621,24 @@
 
     const input = shadowRoot.getElementById('search-input');
 
+    const focusSearchInput = () => {
+      if (!document.hasFocus()) {
+        window.focus();
+      }
+
+      input.focus({ preventScroll: true });
+      input.select();
+    };
+
     // Trigger animation and focus with multiple attempts for reliability
     requestAnimationFrame(() => {
       overlay.classList.add('active');
       input.value = '';
-      input.focus();
+      focusSearchInput();
 
       // Double-ensure focus after a short delay
       setTimeout(() => {
-        input.focus();
-        input.select();
+        focusSearchInput();
       }, 50);
     });
 
