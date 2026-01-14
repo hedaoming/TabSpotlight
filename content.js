@@ -689,6 +689,10 @@
   function handleKeydown(e) {
     if (!isOpen) return;
 
+    // Prevent all keyboard events from bubbling to the page
+    // This stops websites like GitHub from capturing keys (s, c, etc.)
+    e.stopPropagation();
+
     switch (e.key) {
       case 'Escape':
         e.preventDefault();

@@ -1,41 +1,73 @@
 # Tab Spotlight
 
-[Read in 中文](README_zh.md)
+[中文版](README_zh.md)
 
-**Tab Spotlight** is a Spotlight-like tab switcher for Chrome. Designed for keyboard-first usage to quickly access your tabs.
+**Tab Spotlight** is a Spotlight-style tab switcher for Chrome. Designed for keyboard-first usage to quickly find and switch between your browser tabs.
 
-## Features
-- 🚀 **Quick Switch**: Find and switch tabs fast, just like macOS Spotlight.
-- ⌨️ **Keyboard First**: Completely usable without a mouse.
-- 🔍 **Smart Search**: Supports searching by title and URL.
+![Tab Spotlight Banner](img/promo_banner.png)
 
-## Shortcuts
-- **Mac**: `Command` + `Shift` + `S`
-- **Windows/Linux**: `Ctrl` + `Shift` + `S`
+## ✨ Features
 
-## Installation (Developer Mode)
-1. Download the code to your local machine.
-2. Open Chrome and go to the Extensions management page: `chrome://extensions/`.
-3. Enable **"Developer mode"** in the top right corner.
-4. Click **"Load unpacked"**.
-5. Select the folder containing this project.
+- 🚀 **Instant Search** – Find any tab by title or URL with fuzzy matching
+- ⌨️ **Keyboard First** – Designed for speed, no mouse needed  
+- 🎨 **Beautiful UI** – Clean, minimal design that adapts to your system theme
+- 🌗 **Light & Dark Mode** – Automatically matches your system preference
 
-## Release & Packaging
-This project includes an automated packaging script `release.sh` to generate the `.zip` file required for publishing.
+## 📸 Screenshots
 
-### How to use the release script
-The script automatically cleans old build packages and zips everything except development files (like `.git`, `release.sh`, `README.md`, etc.) into `TabSpotlight.zip`.
+### Light Mode
+![Search Interface](img/Search.png)
 
-#### Steps:
-1. Open Terminal.
-2. Navigate to the project root directory:
-   ```bash
-   cd /path/to/TabSpotlight
-   ```
-3. Run the script:
-   ```bash
-   ./release.sh
-   ```
-   *Note: If you encounter permission issues, run `chmod +x release.sh` first.*
+### Search with Highlighting
+![Search Result](img/SearchResult.png)
 
-4. After execution, `TabSpotlight.zip` will be generated in the current directory, ready for upload to the Chrome Web Store.
+### Dark Mode
+![Dark Mode](img/SearchResultDark.png)
+
+## ⌨️ Keyboard Shortcuts
+
+| Action | Mac | Windows/Linux |
+|--------|-----|---------------|
+| Open Tab Spotlight | `⌘` + `Shift` + `S` | `Ctrl` + `Shift` + `S` |
+| Navigate results | `↑` / `↓` | `↑` / `↓` |
+| Switch to tab | `Enter` | `Enter` |
+| Close overlay | `Esc` | `Esc` |
+| Close selected tab | `⌘` + `W` | `Ctrl` + `W` |
+
+## 📦 Installation
+
+### From Chrome Web Store
+*(Coming soon)*
+
+### Developer Mode
+1. Download or clone this repository
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable **"Developer mode"** in the top right corner
+4. Click **"Load unpacked"**
+5. Select the folder containing this project
+
+## 🚀 Release & Packaging
+
+This project includes an automated packaging script to generate the `.zip` file for Chrome Web Store publishing.
+
+```bash
+# Navigate to project directory
+cd /path/to/TabSpotlight
+
+# Run the release script
+./release.sh
+```
+
+> **Note**: If you encounter permission issues, run `chmod +x release.sh` first.
+
+The script generates `TabSpotlight.zip` ready for upload to Chrome Web Store.
+
+## 🔒 Privacy
+
+Tab Spotlight works entirely locally. **No data is collected or sent anywhere.**
+
+👉 [View Full Privacy Policy](PRIVACY.md)
+
+## 📄 License
+
+MIT License

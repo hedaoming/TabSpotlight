@@ -1,51 +1,73 @@
 # Tab Spotlight
 
-[Read in English](README.md)
+[English](README.md)
 
-**Tab Spotlight** 是一个类似 Spotlight 的 Chrome 标签页切换工具。键盘优先，快速访问你的标签页。
+**Tab Spotlight** 是一个类似 macOS Spotlight 的 Chrome 标签页切换工具。键盘优先，快速查找和切换标签页。
 
-## 功能特点
-- 🚀 **快速切换**：像 macOS Spotlight 一样快速查找和切换标签页。
-- ⌨️ **键盘优先**：完全无需鼠标即可操作。
-- 🔍 **智能搜索**：支持标题和 URL 搜索。
+![Tab Spotlight Banner](img/promo_banner.png)
 
-## 快捷键
-- **Mac**: `Command` + `Shift` + `S`
-- **Windows/Linux**: `Ctrl` + `Shift` + `S`
+## ✨ 功能特点
 
-## 安装说明 (开发者模式)
-1. 下载代码到本地。
-2. 打开 Chrome 浏览器，进入扩展程序管理页面：`chrome://extensions/`。
-3. 开启右上角的 **"开发者模式" (Developer mode)**。
-4. 点击 **"加载已解压的扩展程序" (Load unpacked)**。
-5. 选择本项目所在的文件夹。
+- 🚀 **即时搜索** – 通过标题或 URL 模糊匹配快速找到任意标签页
+- ⌨️ **键盘优先** – 专为速度设计，无需鼠标操作
+- 🎨 **精美界面** – 简洁优雅的设计，自动适配系统主题
+- 🌗 **明暗模式** – 自动跟随系统偏好设置
 
-## 发布与打包
-本项目包含一个自动化打包脚本 `release.sh`，用于生成发布所需的 `.zip` 文件。
+## 📸 截图预览
 
-### 如何使用 release 脚本
-该脚本会自动清理旧的构建包，并将除开发文件（如 `.git`, `release.sh`, `README.md` 等）以外的内容打包成 `TabSpotlight.zip`。
+### 浅色模式
+![搜索界面](img/Search.png)
 
-#### 步骤：
-1. 打开终端 (Terminal)。
-2. 进入项目根目录：
-   ```bash
-   cd /path/to/TabSpotlight
-   ```
-3. 运行打包脚本：
-   ```bash
-   ./release.sh
-   ```
-   *注意：如果遇到权限不足的问题，请先添加执行权限：`chmod +x release.sh`*
+### 搜索高亮
+![搜索结果](img/SearchResult.png)
 
-4. 脚本执行完毕后，会在当前目录下生成 `TabSpotlight.zip` 文件，可直接用于上传至 Chrome Web Store。
+### 深色模式
+![深色模式](img/SearchResultDark.png)
 
-### 脚本说明
-`release.sh` 主要执行以下操作：
-- 删除旧的 `TabSpotlight.zip`（如果存在）。
-- 使用 `zip` 命令打包当前目录下的所有文件。
-- 自动排除以下非发布必需文件：
-  - `.git` 目录
-  - `.DS_Store` 系统文件
-  - `release.sh` 脚本本身
-  - `README.md` 文档
+## ⌨️ 快捷键
+
+| 操作 | Mac | Windows/Linux |
+|------|-----|---------------|
+| 打开 Tab Spotlight | `⌘` + `Shift` + `S` | `Ctrl` + `Shift` + `S` |
+| 上下导航 | `↑` / `↓` | `↑` / `↓` |
+| 切换到选中标签 | `Enter` | `Enter` |
+| 关闭搜索框 | `Esc` | `Esc` |
+| 关闭选中标签 | `⌘` + `W` | `Ctrl` + `W` |
+
+## 📦 安装方式
+
+### 从 Chrome 应用商店安装
+*（即将上线）*
+
+### 开发者模式安装
+1. 下载或克隆本仓库
+2. 打开 Chrome，进入 `chrome://extensions/`
+3. 开启右上角的 **「开发者模式」**
+4. 点击 **「加载已解压的扩展程序」**
+5. 选择本项目所在文件夹
+
+## 🚀 发布与打包
+
+本项目包含自动化打包脚本，用于生成 Chrome Web Store 发布所需的 `.zip` 文件。
+
+```bash
+# 进入项目目录
+cd /path/to/TabSpotlight
+
+# 运行打包脚本
+./release.sh
+```
+
+> **注意**：如果遇到权限问题，请先运行 `chmod +x release.sh`
+
+脚本会生成 `TabSpotlight.zip`，可直接上传至 Chrome Web Store。
+
+## 🔒 隐私声明
+
+Tab Spotlight 完全在本地运行。**不收集、不上传任何用户数据。**
+
+👉 [查看完整隐私政策](PRIVACY.md)
+
+## 📄 开源协议
+
+MIT License
