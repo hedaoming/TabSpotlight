@@ -6,32 +6,35 @@
 
 Tab Spotlight is a browser extension designed to help users quickly search and switch between their Chrome tabs. We are committed to protecting your privacy.
 
-## Data Collection
+## Data Collection & Privacy
 
-**Tab Spotlight does NOT collect, store, or transmit any user data.**
+**Tab Spotlight is 100% local. All data stays on your device.**
 
-Specifically:
-- ❌ No personal information is collected
-- ❌ No browsing history is recorded
-- ❌ No tab data is sent to external servers
-- ❌ No analytics or tracking is implemented
-- ❌ No cookies are used
+- ✅ All processing happens locally in your browser
+- ✅ No data is ever transmitted to external servers
+- ✅ No analytics, tracking, or cookies
+- ✅ No personal information is collected or stored
+- ✅ Open source and fully auditable
 
 ## How It Works
 
-Tab Spotlight operates **entirely locally** within your browser:
+Tab Spotlight operates **entirely within your browser**:
 - It reads your open tabs only when you activate the search overlay
-- All searching and filtering happens locally in your browser
-- No data ever leaves your device
+- All searching and filtering happens locally in real-time
+- Tab data is used only for display and is never persisted or transmitted
 
 ## Permissions Explained
 
+This extension uses a minimal permission set. Here's exactly what each permission does:
+
 | Permission | Why It's Needed |
 |------------|-----------------|
-| `tabs` | To read the list of your open tabs for searching |
-| `activeTab` | To interact with the current tab |
-| `storage` | To save your theme preference (light/dark/auto) locally |
-| `scripting` | To inject the search overlay into pages |
+| `tabs` | To read the list of your open tabs (title, URL, favicon) for searching |
+| `activeTab` | To inject the search overlay **only** when you press the keyboard shortcut |
+| `storage` | To save your theme preference (light/dark/auto) locally in Chrome |
+| `scripting` | To inject the search overlay UI when triggered by the user |
+
+> **Note**: We use `activeTab` instead of broad host permissions. This means the extension can only interact with a tab when you **explicitly invoke it** via keyboard shortcut. This is the most privacy-respecting permission model available.
 
 ## Third-Party Services
 

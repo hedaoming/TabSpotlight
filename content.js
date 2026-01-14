@@ -3,6 +3,10 @@
 (function () {
   'use strict';
 
+  // Prevent duplicate injection when script is dynamically re-injected
+  if (window.__tabSpotlightLoaded) return;
+  window.__tabSpotlightLoaded = true;
+
   let isOpen = false;
   let shadowRoot = null;
   let hostElement = null;

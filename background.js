@@ -37,47 +37,35 @@ async function toggleSpotlight() {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    if (!tab) {
+    if (!tab || !tab.url) {
       console.error('[Tab Spotlight] No active tab found');
       return;
     }
 
-
-
     // Check if we can inject into this tab (not chrome://, edge://, etc.)
-    if (tab.url.startsWith('chrome://') || tab.url.startsWith('edge://') ||
-      tab.url.startsWith('chrome-extension://') || tab.url.startsWith('about:')) {
-      console.warn('[Tab Spotlight] Cannot inject into special page:', tab.url);
+    const restrictedPrefixes = ['chrome://', 'chrome-extension://', 'edge://', 'about:', 'https://chrome.google.com/webstore'];
+    if (restrictedPrefixes.some(prefix => tab.url.startsWith(prefix))) {
+      console.warn('[Tab Spotlight] Cannot inject into restricted page:', tab.url);
       return;
     }
 
+    // Ensure tab is focused
     await chrome.windows.update(tab.windowId, { focused: true });
     await chrome.tabs.update(tab.id, { active: true });
 
-    await new Promise((resolve) => setTimeout(resolve, 50));
-
-    // Try to send message first
+    // Try to toggle existing overlay first
     try {
       await chrome.tabs.sendMessage(tab.id, { action: 'toggle' });
-
-    } catch (error) {
-      // Content script might not be loaded yet, inject it
-
-
+    } catch {
+      // Content script not loaded - inject dynamically using activeTab permission
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         files: ['content.js']
       });
 
-      // Wait a bit for script to initialize then send message
-      setTimeout(async () => {
-        try {
-          await chrome.tabs.sendMessage(tab.id, { action: 'toggle' });
-
-        } catch (e) {
-          console.error('[Tab Spotlight] Failed to send message after injection:', e);
-        }
-      }, 100);
+      // Wait for script to initialize, then toggle
+      await new Promise(resolve => setTimeout(resolve, 50));
+      await chrome.tabs.sendMessage(tab.id, { action: 'toggle' });
     }
   } catch (error) {
     console.error('[Tab Spotlight] Error in toggleSpotlight:', error);
